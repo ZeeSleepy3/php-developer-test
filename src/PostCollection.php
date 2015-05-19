@@ -4,6 +4,7 @@ namespace LittleThings;
 
 use IteratorAggregate;
 use JsonSerializable;
+use ArrayIterator;
 
 class PostCollection implements IteratorAggregate, JsonSerializable
 {
@@ -34,4 +35,17 @@ class PostCollection implements IteratorAggregate, JsonSerializable
     {
         return count($this->posts);
     }
+
+    public function getIterator() {
+        return new ArrayIterator($this->posts);
+    }
+
+    public function append(Post $post) {
+        $this->posts[] = $post;
+    }
+
+    public function jsonSerialize() {
+        return $this->posts;
+    }
+
 }
